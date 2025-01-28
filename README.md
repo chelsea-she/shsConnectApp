@@ -5,6 +5,7 @@
 Developed a messenger iOS app to foster communication between 4K+ students and deans.
 
 **Frontend**
+
 We have 4 Login View Controllers
 1) Login View Controller
 2) Student Registration View Controller
@@ -27,12 +28,14 @@ We have also have a Profile View Controller and Photo Viewer View Controller
 We navigate through the profile, conversation, and announcement view controllers through a tab bar
 
 **APNS, Push Ntifications**
+
 When our app loads, XCode/Swift stores our FCM token in User Defaults. (XCode gets the device token from APNS). This then gets pushed and stored in our Firebase Realtime Database under the user’s unique token in the profiles folder.
 When a user sends a message, that message gets stored in that unique conversation id under the conversations folder. This triggers the Firebase Cloud Function which is listening on the conversations folder if a message was created (since we wrote an onCreate function that triggers when new data is added to the database under the conversations)
 Once triggered, it sends a payload to APNS. (What was inefficient was when we added a message to store in Firebase Realtime Database, we attached a FCM token to each message so it was easy to retrieve when the Firebase Cloud Function was triggered)
 The APNS then sends the notification to our app.
 		
 **How our realtime database was structured**
+
 XCode stores all this information to Firebase Realtime Database and retrieves it to display it in our UI.
 When an account is created, all users are stored under profiles folder (each user has a unique user id)
 Each announcement sent stored under announcement_grades
@@ -43,6 +46,7 @@ The archive folder is when a conversation is deleted and messages are stored the
 The codes folder is the access code to create accounts (since only deans can create accounts)
 
 **User authentication**
+
 In XCode, we create an account (signUp) /sign in (signIn) an existing account using FirebaseAuth 
 FirebaseAuth makes sure the text field inputs are valid, then creates a session id so users can stay logged in even when they exit/close out of the app
 We push all user information into profiles in realtime database except for password
